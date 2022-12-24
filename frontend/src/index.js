@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import store from './store';
 //import { ChakraProvider } from "@chakra-ui/react";
 import ChatProvider from './context/ChatProvider';
+//import Appcopy from './Appcopy'
 
 
 ReactDOM.render(

@@ -63,6 +63,8 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import StoreUrlLandingPage from './pages/StoreUrlLandingPage';
 import Recruitment from './pages/Recruitment';
 import ConfirmVerificationLink from './pages/ConfirmVerificationLink';
+import CallIcon from '@mui/icons-material/Call';
+import EmailIcon from '@mui/icons-material/Email';
 import Spring from './pages/Spring';
 
 
@@ -143,14 +145,20 @@ function App() {
   return (
     <BrowserRouter>
     
-      <div className="grid-container" style={{ marginBottom: "0px" }}>
+      <div className="grid-container page-container" style={{ marginBottom: "0px" }}>
         <header>
         <div className='mosganda-header'>
           <div className='mosganda-header-left'>
             {/*header logo*/}
-          <Link to="/">
-                        <div className='mosganda-header-logo'><img style={{width:"20px", height:"auto", marginRight:"10px"}} src="/images/mom2.jpg" alt="" />  <span style={{fontSize:"20px"}}>Mosganda</span> </div>
-          </Link>
+            <Link to ="/">
+            <img style={{width:"80px", height:"auto", marginLeft:"10px"}} src="/images/mom-logo.jpg" alt="" />  
+            </Link>
+            {/* <p className='mosganda-footer-image-container'>
+            <img style={{width:"70px", height:"auto", marginRight:"1px"}} src="/images/mom-logo.jpg" alt="" />  
+            </p> */}
+          {/* <Link to="/">
+                        <img style={{width:"90px", height:"auto", margin:"10px"}} src="/images/mom-logo.jpg" alt="" />
+          </Link> */}
            
             <div className='mosganda-header-itemslink'>
               <Link to="/stores">
@@ -325,7 +333,7 @@ function App() {
           </div>
           </header>
          
-        <main>
+        <main className='content-wrap'>
           <Routes>
           <Route path="/spring" element={ <Spring />}></Route>
           <Route path="/confirmverification/:id" element={ <ConfirmVerificationLink />}></Route>
@@ -378,40 +386,57 @@ function App() {
             </Routes>
           
         </main>
-        <footer>
+        <footer className='footer'>
           <div className='mosganda-footer'>
+            <div className='mosganda-footer-left'>
+              <h4 style={{color:"yellow"}}>Contact us</h4>
+              <p className='mosganda-footer-image-container'>
+            <img style={{width:"70px", height:"auto", marginRight:"1px"}} src="/images/mom-logo.jpg" alt="" />  
+            </p>
+            {/* <p className='mosganda-footer-image-container'>
+            <img style={{width:"20px", height:"auto", marginRight:"1px"}} src="/images/mom2.jpg" alt="" />  
+            <p style={{fontSize:"15px", marginLeft:"5px"}}>Mosganda</p>
+            </p> */}
+            <p>
+              <span><CallIcon /></span>
+              <span style={{marginLeft:"5px"}}>09028718288</span>
+            </p>
+            <p>
+              <span><EmailIcon /></span>
+              <span style={{marginLeft:'5px'}}>contact@mosganda.com</span>
+            </p>
+                  
+
+            </div>
+            <div className='mosganda-footer-center'>
+              <h4 style={{color:"yellow"}}>Quick links</h4>
+              <p className="mosganda-footer-center-links">
+              <Link to="/about">About us</Link>
+              <Link to="/guide">Guide</Link>
+              <Link to="/privacy">Privacy</Link>
+              <Link to="/termsandconditions">Terms and Conditions</Link>
+              <Link to="/feedback">Your feedback</Link>
+              <Link to="/recruitment">Careers</Link>
+              </p>
+            </div>
+            <div className='mosganda-footer-right'>
+              <h4 style={{color:"yellow"}}>Follow us</h4>
+              <p className="mosganda-footer-social-links">
+                <Link to="#"><FacebookIcon sx={{ fontSize: 25, backgroundColor: "white", color: "blue" }} /></Link>
+                <Link to="#"><InstagramIcon sx={{fontSize:25, backgroundColor:"white", color:"purple"}} /></Link>
+                <Link to="#"><TwitterIcon sx={{fontSize:25, backgroundColor:"white", color:"#1c86ee"}} /></Link>
+                <Link to="#"><YouTubeIcon sx={{fontSize:25, backgroundColor:"white", color:"red"}} /></Link>
+              </p>
+            </div>
+          </div>
+          <div className="footer-all-right-reserved">All rights reserved</div>
+          {/* <div className='mosganda-footer'>
             <div className='mosganda-footer-item'>
-                            {/* <h4 style={{display:"flex", alignItems:"center", backgroundColor:"white", color:"navy"}}><img style={{ width: "20px", height: "auto",marginRight:"10px" }} src="/images/m-logo.jpg" alt="" /> { " "} Mosganda</h4> 
-                            */}
+                            
                  <div className='mosganda-footer-logo'><img style={{width:"20px", height:"auto", marginRight:"1px"}} src="/images/mom2.jpg" alt="" />  <span style={{fontSize:"20px"}}>Mosganda</span> </div>
                   <p>09028718288</p>
                   <p>contact@mosganda.com</p>
-                  {/* <p style={{paddingBottom:"0", marginBottom:"0",fontSize:"13px", color:"yellow"}}>Subscribe to our newsletter</p>
-                  <form className='newsletter' onSubmit={submitNewsletter}>
-                   <div><input type="text" id="newsletter" placeholder='example@gmail.com'
-                    onChange={(e) => setNewsEmail(e.target.value)} required
-                    value={newsEmail}
-                   />
-                   <label />
-                   </div>
-                    <button type="submit">Subscribe</button>
-                    {
-                    loadingnewsEmail && <LoadingBox></LoadingBox>
-                    }
-                    {
-                    createNewsEmailFail && <Stack sx={{ width: '90%' }} spacing={2}>
-                    <Alert severity="error" onClose={() => setCreateNewsEmailFail(false)}>Error.</Alert>
-      
-                    </Stack>
-                    }
-                    {
-                    createNewsEmailSuccess && <Stack sx={{ width: '90%' }} spacing={2}>
-                    <Alert severity="success" onClose={() => setCreateNewsEmailSuccess(false)}>Successful.</Alert>
-      
-                     </Stack>
-                      }
-                    </form>
-                    */}
+                  
                 </div>
              
             <div className='mosganda-footer-item'>
@@ -441,7 +466,7 @@ function App() {
             
             
                 </div>
-          <div className="footer-all-right-reserved">All rights reserved</div>
+          <div className="footer-all-right-reserved">All rights reserved</div> */}
         </footer>
       </div>
     </BrowserRouter>
