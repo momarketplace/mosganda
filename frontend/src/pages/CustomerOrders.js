@@ -49,11 +49,11 @@ function CustomerOrders() {
                                 </Link>
                                 <div className ="card-body">
                                 <Link to={`/product/${product._id}`}>
-                                <h3>Product Name: {product.name}</h3>
+                                <p>Product Name: <strong>{product.name}</strong></p>
                                 </Link>
-                                <div className="price">Price: <strong>#{product.price}</strong></div>
+                                <p className="price">Price: <strong>#{product.price}</strong></p>
                                 <div>
-                                <h3>Customer Information</h3>
+                                <h5>Customer Information</h5>
                                 <p>Name: <strong>{product.buyerName}</strong></p>
                                 <p>Phone: <strong>{product.buyerPhone}</strong></p>
                                 <p style={{maxWidth:"250px"}}>Address: <strong>{product.buyerAddress}</strong></p>

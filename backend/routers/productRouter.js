@@ -355,6 +355,17 @@ productRouter.put('/issettled', expressAsyncHandler( async(req, res) => {
   res.json(settledProduct);
 }))
 
+//update a product when withdraw request is sent
+//so that the seller will not send another withdraw again
+productRouter.put('/hassentwithdrawrequest', isAuth, expressAsyncHandler( async(req,res) =>{
+  const product = await Product.findById(req.body.productId);
+  if(product) {
+    product.hasSentWithdrawRequest = true
+  }
+  const confirmedSent = await product.save()
+  res.json(confirmedSent)
+}))
+
 
 //block all user's products
 productRouter.put('/banned', isAuth, isAdmin, expressAsyncHandler(async (req, res) => {

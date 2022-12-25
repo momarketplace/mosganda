@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import './SoldProducts.css'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 const style = {
   position: 'absolute',
@@ -50,7 +51,7 @@ function SoldProducts() {
   //get sold products from redux store
   const productSold = useSelector((state) => state.productSold);
   const { loading, error, soldProducts } = productSold
-  //console.log(soldProducts);
+  console.log(soldProducts);
 
   //get widthdrawal from redux store
   const withdrawal = useSelector((state) => state.withdrawal);
@@ -73,11 +74,27 @@ useEffect(() =>{
   }
 
   if (success) {
+    updateWithdrawRequest()
     setTimeout(() => {
       window.location='/soldproducts'
-    },3000)
+    },4000)
   }
-  
+
+  //we want to prevent the user from sending multiple request for one product
+  async function updateWithdrawRequest(){
+    try {
+      const config = {
+        headers: {
+            Authorization: `Bearer ${userInfo.token}`,
+        },
+    }
+     await axios.put("/api/v1/product/hassentwithdrawrequest", { productId }, config);
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+ 
     return (
       <div style={{width:"100%",maxWidth:"100%", backgroundColor:"white"}}>
         
@@ -214,7 +231,7 @@ useEffect(() =>{
                   setEmail(userInfo.email)
                   setPhone(userInfo.phone)
                   handleOpen()
-                }}>Withdraw</Button>
+                }} disabled={product.hasSentWithdrawRequest}>Withdraw</Button>
                }
                   </div>
                 </div>
