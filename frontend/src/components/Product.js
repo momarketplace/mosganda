@@ -1,5 +1,5 @@
 import React from "react";
-//import { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 //import Rating from "./Rating";
 import Button from "@mui/material/Button";
@@ -11,6 +11,17 @@ function Product(props) {
   const { product, showStoreButton} = props;
   //const [qty, setQty] = useState(1);
   const qty = 1;
+  const [ buyIcon, setBuyIcon ] = useState(true)
+
+  //function to blink buyIcon
+  const timer = setTimeout(() =>{
+    setBuyIcon(buyIcon != true)
+  },1000)
+ 
+  const handleInterval = () =>{
+    clearTimeout(timer)
+  }
+  
   return (
     <div key={product._id} className="card product">
       <Link to={`/product/${product._id}`}>
@@ -31,9 +42,9 @@ function Product(props) {
           <span>
             <Link to={`/basket/${product._id}?qty=${qty}`}>
               <Button variant="contained" color="secondary" size="small">
-                <span className="card-body-span-items">
-                  <AddShoppingCartOutlinedIcon />
-                  <span>Buy</span>
+                <span className="card-body-span-items" onClick={handleInterval}>
+                  {buyIcon && <AddShoppingCartOutlinedIcon />}
+                  <span>{buyIcon? "Buy":"click me"}</span>
                 </span>
                 
               </Button>
