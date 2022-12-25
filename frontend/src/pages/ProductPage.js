@@ -32,7 +32,7 @@ function ProductPage() {
 
   
     return (
-      <div className='responsive' style={{backgroundColor:"#f5f5f5", padding:"10px"}}>
+      <div className='responsive gray-color' style={{backgroundColor:"#f5f5f5", padding:"10px"}}>
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (

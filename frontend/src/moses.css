@@ -69,6 +69,14 @@ footer {
   grid-area: footer;
 }
 
+h1, h2, h3, h4, h5, h6 {
+ color:#404040
+}
+p {
+  color: #565051;
+  font-size: 13px;
+}
+
 /* insertion begins */
 .page-container {
   position: relative;
@@ -477,11 +485,13 @@ img.medium {
   padding: 10px;
   padding-left: 20px;
   margin-left: -10px;
+  color: gray;
 }
 
 .mosganda-description-in-homepage>p {
   font-size: 11px;
   width: 100%;
+  text-align: justify;
 }
 
 @media screen and (max-width: 600px) {
@@ -497,11 +507,14 @@ img.medium {
 
   .mosganda-description-in-homepage {
     padding: 5px;
-    max-width: 100%;
+    max-width: 90%;
+    text-align: center;
   }
 
   .mosganda-description-in-homepage>p {
-    max-width: 80%;
+    max-width: 90%;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 
@@ -1087,6 +1100,10 @@ a {
  padding: 5px;
 }
 
+.mosganda-footer-left > p > span{
+  color: white !important;
+}
+
 .mosganda-footer-image-container {
   background-color: #fff;
   color: #000;
@@ -1148,6 +1165,7 @@ a {
     text-align: center;
   }
 
+  
   .mosganda-footer-image-container{
     margin: 0 auto;
   }
@@ -1358,3 +1376,8 @@ a {
   padding: 20px;
   max-width: 50%;
 }
+
+.gray-color {
+  color: #565051;
+}
+

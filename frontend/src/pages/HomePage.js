@@ -205,7 +205,7 @@ function HomePage() {
           
           <div style={{marginTop:"30px"}} className='mosganda-description-in-homepage'>
             <h5>Mosganda Online Marketplace</h5>
-            <p>Mosganda is an online platform for buying and selling goods and services. For sellers, create your online store and make 24/7 sales. It is very easy to sell on Mosganda - register and log in, create your online store by filling your store information, add items to your store and post them for sale. For buyers, click on the item you want to buy, and the system will lead you to pay for it. <Link to="/guide" style={{color:"blue"}}>Learn more about Mosganda and how to use this website here.</Link> </p>
+            <p>Mosganda is an online platform for buying and selling goods and services. Your business deserves to be online. Register, create your online store, add items you want to sell, and post them for sale. You do not need any graphic or design skill to create your online store. <Link to="/guide" style={{color:"blue"}}>Learn more about Mosganda and how to use this website here.</Link> </p>
           </div>
         
       </div>

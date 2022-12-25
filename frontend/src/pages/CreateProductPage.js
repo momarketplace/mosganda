@@ -137,16 +137,16 @@ useEffect(() => {
         </div>
         
         
-        <div style={{ backgroundColor: "#fff", padding: "10px", maxWidth:"100%"}}>
+        <div style={{ backgroundColor: "#fff", padding: "10px", maxWidth:"100%"}} className="gray-color">
           <div style={{padding:"5px"}}>
-              <h2 style={{textAlign:"center"}}>Create Product</h2>
-            <p style={{ maxWidth: "90%" }}>Do not fake the price of your item/product in other to avoid rejection. </p>
-            <p style={{maxWidth:"90%"}}> We will only charge you 3% when you successfully sell this item.</p>
+              <h3 style={{textAlign:"center"}}>Create Product</h3>
+            <p style={{ maxWidth: "90%", textAlign:'center' }}>Do not fake the price of your item/product in other to avoid rejection from your customers. We will only charge you 3% when you successfully sell this item.</p>
+            
               {/*<pre>{JSON.stringify(imageUrl, null, '\t')}</pre> */}
             </div>
           <form className="create-product" onSubmit={submitHandler}>
             
-            <div className='create-product-container'>
+            <div>
               <div className='create-product-one'>
                 <div className='create-product-items'>
             <lable htmlFor="name">Product Name<span className="required-field">*</span></lable>
