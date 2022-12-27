@@ -131,9 +131,9 @@ const [createChatLoading, setCreateChatLoading] = useState(false)
                             {
                                 mystore?.isClosed?
                                 (<div className='close-store' style={{maxWidth:"100%"}}>
-          <h1>Business Activities Closed.</h1>
-          <p>To be opened: </p>
-                                    <h3>{mystore.toBeOpened}</h3>
+          <h2 style={{color:"white"}}>Business Activities Closed.</h2>
+          <p style={{color:"white"}}>To be opened: </p>
+                                    <h3 style={{color:"yellow"}}>{mystore.toBeOpened}</h3>
                                     </div>) :
                                     (
                                         <div>

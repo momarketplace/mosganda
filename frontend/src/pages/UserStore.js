@@ -246,9 +246,9 @@ function UserStore() {
       {
         userStore && userStore.isClosed === true ?
         (<div className='close-store'>
-          <h1>Business Activities Closed.</h1>
-          <p>To be opened: </p>
-            <h3>{ userStore && userStore.toBeOpened }</h3>
+          <h2 style={{color:"white"}}>Business Activities Closed.</h2>
+          <p style={{color:"white"}}>To be opened: </p>
+            <h3 style={{color:"yellow"}}>{ userStore && userStore.toBeOpened }</h3>
             <button onClick={handleOpenStore}>Open</button>
             {
               loadOpenStore && <LoadingBox></LoadingBox>
@@ -330,7 +330,7 @@ function UserStore() {
         </div>
         <div>
           <h4>
-            <span style={{fontSize:'15px'}}>Store link: <span style={{backgroundColor:"#011628", color:"yellow", padding:"5px", borderRadius:"5px"}}>https://www.mosganda.com/{userStore && userStore.businessName }</span></span> {" "}
+            <p>Store link: <span style={{backgroundColor:"#011628", color:"yellow", padding:"5px", borderRadius:"5px"}}>https://www.mosganda.com/{userStore && userStore.businessName }</span></p> {" "}
             <Button variant="outlined" onClick={() => copyLink(`localhost:3000/${userStore.businessName}`)}>
               Copy Link
               <ContentCopyIcon />

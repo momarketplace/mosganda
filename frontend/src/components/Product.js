@@ -16,7 +16,7 @@ function Product(props) {
   //function to blink buyIcon
   const timer = setTimeout(() =>{
     setBuyIcon(buyIcon != true)
-  },1000)
+  },2000)
  
   const handleInterval = () =>{
     clearTimeout(timer)
