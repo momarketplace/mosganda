@@ -41,7 +41,7 @@ function Product(props) {
         <div className="card-body-span">
           <span>
             <Link to={`/basket/${product._id}?qty=${qty}`}>
-              <Button variant="contained" color="secondary" size="small">
+              <Button variant="contained" color="secondary" size="small" className={buyIcon?"purple-lilly":""}>
                 <span className="card-body-span-items" onClick={handleInterval}>
                   {buyIcon && <AddShoppingCartOutlinedIcon />}
                   <span>{buyIcon? "Buy":"click me"}</span>

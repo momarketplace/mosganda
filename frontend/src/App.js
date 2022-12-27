@@ -48,7 +48,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+//import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import Services from './pages/Services';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -125,7 +125,7 @@ function App() {
     myNotification()
   },[userInfo, selectedChat, chats])
  
-  const myNotifications = notifs.filter((n) => n.latestMessage.sender._id !== userInfo._id)
+  const myNotifications = notifs?.filter((n) => n.latestMessage.sender._id !== userInfo._id)
   
   //function to collect newsletter email
   // const submitNewsletter = async(e) => {
