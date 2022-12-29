@@ -66,6 +66,7 @@ import ConfirmVerificationLink from './pages/ConfirmVerificationLink';
 import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
 import Spring from './pages/Spring';
+//import Homepagecopy from './pages/Homepagecopy';
 
 
 
@@ -151,7 +152,7 @@ function App() {
           <div className='mosganda-header-left'>
             {/*header logo*/}
             <Link to ="/">
-            <img style={{width:"80px", height:"auto", marginLeft:"10px"}} src="/images/mom-logo.jpg" alt="" />  
+            <img style={{width:"80px", height:"auto", marginLeft:"20px"}} src="/images/mom-logo.jpg" alt="" />  
             </Link>
             {/* <p className='mosganda-footer-image-container'>
             <img style={{width:"70px", height:"auto", marginRight:"1px"}} src="/images/mom-logo.jpg" alt="" />  
@@ -382,6 +383,7 @@ function App() {
           {/* <Route path="/basket/:id?" element={<BasketPage />}></Route> */}
           <Route path="/stores" element={<StoresPage />}></Route>
           <Route path="/product/:id" element={<ProductPage />}></Route>
+          {/* <Route path="/" index element={<Homepagecopy />}></Route> */}
             <Route path="/" index element={<HomePage />}></Route>
             </Routes>
           

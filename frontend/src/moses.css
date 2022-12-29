@@ -516,6 +516,10 @@ img.medium {
     margin-right: auto;
     margin-left: auto;
   }
+
+  .category {
+    margin-top: 5px;
+  }
 }
 
 
