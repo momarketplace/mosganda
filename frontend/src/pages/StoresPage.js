@@ -1,19 +1,19 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { getStores } from '../actions/storeActions';
 import Store from '../components/Store';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import Button from "@mui/material/Button";
+//import Button from "@mui/material/Button";
 
 import axios from 'axios';
 import Stack from '@mui/material/Stack';
 import Alert from '@mui/material/Alert';
 import SearchIcon from '@mui/icons-material/Search';
 //import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+//import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 
 function StoresPage() {
 
@@ -25,11 +25,12 @@ function StoresPage() {
   const [emptySearch, setEmptySearch] = useState(false)
 
   const [category, setCategory] = useState('')
-  const [categoryResult, setCategoryResult] = useState([])
-  const [emptyCategory, setEmptyCategory] = useState('')
-  const [loadingCategory, setLoadingCategory] = useState('')
-  const [errorCategory, setErrorCategory] = useState('')
-  const [notFoundCategory, setNotFoundCategory] = useState('')
+  const [displayCategory, setDisplayCategory] = useState(false)
+  // const [categoryResult, setCategoryResult] = useState([])
+  // const [emptyCategory, setEmptyCategory] = useState('')
+  // const [loadingCategory, setLoadingCategory] = useState('')
+  // const [errorCategory, setErrorCategory] = useState('')
+  // const [notFoundCategory, setNotFoundCategory] = useState('')
 
 
   const dispatch = useDispatch();
@@ -68,38 +69,92 @@ function StoresPage() {
 
 
   //search stores by category
-  const handleCategory = async (e) => {
-    e.preventDefault()
+  // const handleCategory = async (e) => {
+  //   e.preventDefault()
 
-    if (!category || category === '') {
-      setEmptyCategory(true)
-      return
-    }
+  //   if (!category || category === '') {
+  //     setEmptyCategory(true)
+  //     return
+  //   }
 
-    try {
-      setLoadingCategory(true)
-      const { data } = await axios.get(`/api/v1/store/search?search=${category}`)
-      setLoadingCategory(false)
-      setCategoryResult(data)
-      if (data.length === 0) {
-        setNotFoundCategory(true)
-      }
-      setCategory('')
-    } catch (error) {
-      setErrorCategory(true)
-      setLoadingCategory(false)
-    }
+  //   try {
+  //     setLoadingCategory(true)
+  //     const { data } = await axios.get(`/api/v1/store/search?search=${category}`)
+  //     setLoadingCategory(false)
+  //     setCategoryResult(data)
+  //     if (data.length === 0) {
+  //       setNotFoundCategory(true)
+  //     }
+  //     setCategory('')
+  //   } catch (error) {
+  //     setErrorCategory(true)
+  //     setLoadingCategory(false)
+  //   }
+  // }
+
+
+  function handleCategory() {
+    setDisplayCategory(true)
   }
 
 
   return (
     <div>
 
-      <div className='stores-header'>
+<div className='homepage-header'>
+          
+          <form className='mosganda-header-search' onSubmit={handleSearch}>
+            <input type="text" id="search" className='mosganda-search-input' placeholder=' Find store by name'
+             value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            
+          />
+          
+            <button className='mosganda-header-searchIconContainer' type = "submit"><SearchIcon /></button>
+            
+          </form>
+        
+
+
+        <div>
+          
+        <label htmlFor="category"></label>
+            <select id="category" className='category' value={category} onChange={(e) => {
+              setCategory(e.target.value)
+              handleCategory(category)
+              }}>
+            <option value=""> Category</option>
+            <option value="supermarket">Supermarket</option>
+                <option value="men-fashion">Men's fashion</option>
+              <option value="women-fashion">Women's fashion</option>
+              <option value="men-and-women">Fashion (Men and women)</option>
+                <option value="phone-and-accessories">Phone and Accessories</option>
+                <option value="computer-and-accessories">Computer and Accessories</option>
+                <option value="health-and-beauty">Health and Beauty</option>
+                <option value="baby-products">Baby Products</option>
+                <option value="furniture">Furniture</option>
+                <option value="automobile">Automobile</option>
+                <option value="gaming">Gaming</option>
+                <option value="food">Food</option>
+                <option value="drinks">Drinks</option>
+                <option value="household-equipment">Household equipment</option>
+                <option value="groceries">Groceries</option>
+                <option value="pharmacy">Pharmacy (drugs)</option>
+                <option value="others">Others</option>
+             </select>
+             
+        </div>
+          
+        
+      </div>
+
+
+
+      {/* <div className='stores-header'>
         <div className='stores-header-left'>
           
           <form className='stores-form' onSubmit={handleSearch}>
-                <input type="text" id="search" placeholder='Search by name'
+                <input type="text" id="search" placeholder='Search store by name'
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -109,7 +164,7 @@ function StoresPage() {
           </form>
           {
               notFound && <Stack sx={{ width: '90%' }} spacing={2}>
-              <Alert severity="success" onClose={() => setNotFound(false)}>Item Not Found</Alert>
+              <Alert severity="success" onClose={() => setNotFound(false)}>Store Not Found</Alert>
       
             </Stack>
               }
@@ -157,9 +212,9 @@ function StoresPage() {
           </form>
           
         </div>
-      </div>
+      </div> */}
 
-      <div style={{ minWidth: "50%", maxWidth:"80%" }}>
+      {/* <div style={{ minWidth: "50%", maxWidth:"80%" }}>
         {
               notFoundCategory && <Stack sx={{ width: '90%' }} spacing={2}>
               <Alert severity="success" onClose={() => setNotFoundCategory(false)}>Store(s) Not Found.</Alert>
@@ -172,7 +227,7 @@ function StoresPage() {
       
             </Stack>
                 }
-      </div>
+      </div> */}
 
 
       {/* <div className="row around">
@@ -271,13 +326,22 @@ function StoresPage() {
         </div>
 
 
-      <div style={{ marginBottom: "10px", borderBottom:`${categoryResult.length>0?"2px solid #023c3f":""}`}} className="row center">
-          {loadingCategory && <LoadingBox></LoadingBox>}
-          {errorCategory && <MessageBox variant="danger">Failed to load category.</MessageBox>}
-            {categoryResult?.map((store) => (
-            !store.isBanned &&  <Store key={store._id} store={store}></Store>
-            ))}
-        </div>
+        {
+            displayCategory &&
+           <> 
+            <h5 style={{textAlign:"center"}}>Category for {category}</h5>
+            <p style={{textAlign:"center"}}>Store(s) that match this category are pushed above the black line below. If there is no match, the page remains the same.</p>
+           <div style={{ marginBottom: "10px", borderBottom:`${displayCategory?"2px solid #023c3f":""}`}} className="row center">
+            {stores?.map((store) => (
+              store.category === category && !store.isBanned &&
+              (<Store key={store._id} store={store}></Store>)
+              
+            ))
+            }
+           
+        </div></>
+          }
+      
 
 
 

@@ -126,18 +126,18 @@ function Homepage() {
                 handleCategory(category)
                 }}>
               <option value=""> Category</option>
-              <option value="men">Men's fashion</option>
-              <option value="women">Women's fashion</option>
-               <option value="phone">Phone and Accessories</option>
-                <option value="computing">Computing</option>
-                <option value="health">Health and Beauty</option>
-                <option value="baby">Baby Products</option>
+              <option value="men-fashion">Men's fashion</option>
+              <option value="women-fashion">Women's fashion</option>
+               <option value="phone-and-accessories">Phone and Accessories</option>
+                <option value="computer-and-accessories">Computer and Accessories</option>
+                <option value="health-and-beauty">Health and Beauty</option>
+                <option value="baby-products">Baby Products</option>
                 <option value="furniture">Furniture</option>
                 <option value="automobile">Automobile</option>
                 <option value="gaming">Gaming</option>
                 <option value="food">Food</option>
                 <option value="drinks">Drinks</option>
-                <option value="household">Household equipment</option>
+                <option value="household-equipment">Household equipment</option>
                 <option value="groceries">Groceries</option>
                 <option value="pharmacy">Pharmacy (drugs)</option>
                 <option value="others">Others</option>

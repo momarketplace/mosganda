@@ -189,18 +189,18 @@ useEffect(() => {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-                <MenuItem value="men">Men's Fashion</MenuItem>
-                <MenuItem value="women">Women's Fashion</MenuItem>
-          <MenuItem value="phone">Phone and Accessories</MenuItem>
-                <MenuItem value="computing">Computing</MenuItem>
-                <MenuItem value="health">Health and Beauty</MenuItem>
-                <MenuItem value="baby">Baby Products</MenuItem>
+                <MenuItem value="men-fashion">Men's Fashion</MenuItem>
+                <MenuItem value="women-fashion">Women's Fashion</MenuItem>
+          <MenuItem value="phone-and-accessories">Phone and Accessories</MenuItem>
+                <MenuItem value="computer-and-accessories">Computer and Accessories</MenuItem>
+                <MenuItem value="health-and-beauty">Health and Beauty</MenuItem>
+                <MenuItem value="baby-products">Baby Products</MenuItem>
                 <MenuItem value="furniture">Furniture</MenuItem>
                 <MenuItem value="automobile">Automobile</MenuItem>
                 <MenuItem value="gaming">Gaming</MenuItem>
                 <MenuItem value="food">Food</MenuItem>
                 <MenuItem value="drinks">Drinks (Beer, wine, water, etc)</MenuItem>
-                <MenuItem value="household">household (Kitchen equipment)</MenuItem>
+                <MenuItem value="household-equipment">household (Kitchen equipment)</MenuItem>
                 <MenuItem value="groceries">Groceries</MenuItem>
                 <MenuItem value="pharmacy">Pharmacy (drugs)</MenuItem>
                 <MenuItem value="others">Others</MenuItem>
