@@ -9,7 +9,7 @@ function Store(props) {
     return (
         <div key = { store._id } className="card product">
             <Link to={`/store/${store._id}`}>
-                        <h2 style={{ textAlign: "center" }}>{ store.name }</h2>
+                        <h5 style={{ textAlign: "center" }}>{ store.name }</h5>
                     </Link>
                 <Link to ={`/store/${store._id}`}>
                      {/* image size should be 680px by 830px */}
@@ -17,10 +17,10 @@ function Store(props) {
 
                 </Link>
             <div className="card-body">
-                <div>
-                    <p>{ `${store.description.substring(0,30)}...`}</p>
+                <div style={{padding:"5px"}}>
+                    <p>{ `${store.description.substring(0,50)}...`}</p>
                 </div>
-                <div className='card-body-span'>
+                <div className='card-body-span card-body-span-store'>
                     <span>
                         <Link to ={`/store/${store._id}`}>
                             <Button variant="contained" color="success" size="small">

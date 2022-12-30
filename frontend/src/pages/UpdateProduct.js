@@ -119,7 +119,7 @@ function UpdateProduct(props) {
 
     return (
         <div>
-            <div style={{padding:"5px", backgroundColor:"white", padding:'10px', width:"100%"}}>
+            <div style={{ backgroundColor:"white", padding:'10px', width:"100%"}}>
               <h2 style={{textAlign:"center"}}>Edit Product</h2>
               <p style={{ maxWidth: "90%" }}>Do not fake the price of your item/product in other to avoid rejection. </p>
                 {/*<pre>{JSON.stringify(imageUrl, null, '\t')}</pre> */}
