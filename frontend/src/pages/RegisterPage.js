@@ -105,7 +105,7 @@ function RegisterPage() {
           !showVerificationBox &&
           <form onSubmit={handleSummit}>
           <div className='register'>
-            <h2 style={{textAlign:"center"}}>Register</h2>
+            <h3 style={{textAlign:"center"}}>Register</h3>
             <p>Please fill in this form to create an account.</p>
             
             <div className='register-items'>

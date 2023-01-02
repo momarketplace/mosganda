@@ -23,6 +23,8 @@ function OrderPage() {
     const [name, setName ] = useState("")
     const [phone, setPhone ] = useState("")
     const [ amount, setAmount ] = useState(0)
+
+    const [buyerId, setBuyerId] = useState('')
     
 
     //get login user details from store
@@ -78,6 +80,7 @@ function OrderPage() {
             setEmail(email)
             setPhone(phone)
             setName(name)
+            setBuyerId(order.shippingAddress.buyerId)
         }
        
     },[email, name, order, phone])
@@ -114,12 +117,14 @@ function OrderPage() {
 
           //update paid products
         order.orderItems.map((x) => {
-            return dispatch(paidProduct({id: x.product, buyerEmail:email, orderId:id, deliveryCost: x.deliveryCost, service: x.service }))
+            return dispatch(paidProduct({id: x.product, buyerEmail:email, orderId:id, deliveryCost: x.deliveryCost, service: x.service,buyerId:buyerId }))
         });
           
            //notify buyer
         dispatch(orderNotification(id))
       }
+
+      //console.log(buyerId)
 
     return loading? (<LoadingBox></LoadingBox>):
     error? (<MessageBox variant="danger">{error}</MessageBox>):

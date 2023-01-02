@@ -14,6 +14,7 @@ import Modal from '@mui/material/Modal';
 import './SoldProducts.css'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import { ChatState } from '../context/ChatProvider';
 
 const style = {
   position: 'absolute',
@@ -39,6 +40,11 @@ function SoldProducts() {
   const [amountToPay, setAmountToPay] = useState(0)
   const [serviceCharge, setServiceCharge] = useState(0)
   const [deliveryCost, setDeliveryCost ] = useState(0)
+
+  //for send message
+  const [createChatLoading, setCreateChatLoading] = useState(false)
+  const [errorCreateChat, setErrorCreateChat] = useState(false)
+  const [successCreateChat, setSuccessCreateChat] = useState(false)
   
 //console.log(productId)
 
@@ -46,6 +52,10 @@ function SoldProducts() {
   //get login user details from store
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+
+   //import state from context
+   const {setSelectedChat, chats, setChats } =
+   ChatState();
  
 
   //get sold products from redux store
@@ -93,6 +103,42 @@ useEffect(() =>{
       console.log(error)
     }
 
+  }
+
+
+  //function to create chat between seller and buyer
+  //handle chat
+  const handleChat = async (userId) => {
+    if (!userInfo) {
+      window.location = "/login"
+      return
+    } else {
+      try {
+     setCreateChatLoading(true)
+     const config = {
+         headers: {
+           "Content-type":"application/json",
+           Authorization: `Bearer ${userInfo.token}`
+         },
+       };
+     const { data } = await axios.post('/api/v1/chat', { userId }, config);
+     if(!chats.find((c) => c._id === data._id)) setChats([data, ...chats])
+     setCreateChatLoading(false)
+     setSuccessCreateChat(true)
+        setSelectedChat(data)
+        
+   } catch (error) {
+    setErrorCreateChat(error.message)
+   }
+    }
+   
+  }
+
+  if (successCreateChat) {
+    window.location = "/chats"
+    setTimeout(() => {
+      setSuccessCreateChat(false)
+    },3000)
   }
  
     return (
@@ -193,7 +239,22 @@ useEffect(() =>{
                 /><Button sx={{m:1}} variant="contained" size="small"
                          >
                          <Link to = {`/product/${product._id}`} style={{color:"white"}}>View product</Link>
-                      </Button></p>
+                      </Button>
+                     
+                      </p>
+                      <Button variant="outlined" color="primary" size="small" onClick={() => {
+                                         
+                                         handleChat(product.buyerId)
+                                    }}>
+                                    Send Message
+                                  </Button>
+                      {
+                          createChatLoading && <LoadingBox></LoadingBox>
+                          }
+                          {
+                            errorCreateChat &&
+                            <MessageBox variant="danger">Error</MessageBox>
+                          }
                     <p className='soldproduct-item'>
                       <span style={{marginRight:"5px"}}>Name: {product.name}</span>
                     </p>

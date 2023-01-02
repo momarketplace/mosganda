@@ -1,12 +1,19 @@
 import React from 'react'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getOrderedProducts } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import Button from "@mui/material/Button";
+import { ChatState } from '../context/ChatProvider';
+import axios from "axios"
 
 function CustomerOrders() {
+
+    const [createChatLoading, setCreateChatLoading] = useState(false)
+  const [errorCreateChat, setErrorCreateChat] = useState(false)
+  const [successCreateChat, setSuccessCreateChat] = useState(false)
 
   //get login user details from store
   const userLogin = useSelector((state) => state.userLogin);
@@ -16,6 +23,10 @@ function CustomerOrders() {
   //get ordered products from redux store
   const customerOrders = useSelector((state) => state.customerOrders);
   const { loading, error, orderedProducts } = customerOrders
+
+    //import state from context
+  const {setSelectedChat, chats, setChats } =
+    ChatState();
   
   const dispatch = useDispatch();
 
@@ -23,7 +34,44 @@ function CustomerOrders() {
     dispatch(getOrderedProducts())
   },[dispatch, userInfo])
 
-                
+    
+  //function to create chat between seller and buyer
+  //handle chat
+  const handleChat = async (userId) => {
+    if (!userInfo) {
+      window.location = "/login"
+      return
+    } else {
+      try {
+     setCreateChatLoading(true)
+     const config = {
+         headers: {
+           "Content-type":"application/json",
+           Authorization: `Bearer ${userInfo.token}`
+         },
+       };
+     const { data } = await axios.post('/api/v1/chat', { userId }, config);
+     if(!chats.find((c) => c._id === data._id)) setChats([data, ...chats])
+     setCreateChatLoading(false)
+     setSuccessCreateChat(true)
+        setSelectedChat(data)
+        
+   } catch (error) {
+    setErrorCreateChat(error.message)
+   }
+    }
+   
+  }
+
+  if (successCreateChat) {
+    window.location = "/chats"
+    setTimeout(() => {
+      setSuccessCreateChat(false)
+    },3000)
+  }
+  
+  console.log(orderedProducts)
+
     return (
         <div style={{backgroundColor:"white"}}>
             <h3 style={{ textAlign: "center",padding:"10px" }}>Customer orders</h3>
@@ -54,7 +102,19 @@ function CustomerOrders() {
                                 <p className="price">Price: <strong>#{product.price}</strong></p>
                                 <div>
                                 <h5>Customer Information</h5>
-                                <p>Name: <strong>{product.buyerName}</strong></p>
+                                <p>Name: <strong>{product.buyerName}</strong>  <Button variant="contained" color="primary" size="small" onClick={() => {
+                                         
+                                         handleChat(product.buyerId)
+                                    }}>
+                                    Send Message
+                                  </Button></p>
+                                  {
+                          createChatLoading && <LoadingBox></LoadingBox>
+                          }
+                          {
+                            errorCreateChat &&
+                            <MessageBox variant="danger">Error</MessageBox>
+                          }
                                 <p>Phone: <strong>{product.buyerPhone}</strong></p>
                                 <p style={{maxWidth:"250px"}}>Address: <strong>{product.buyerAddress}</strong></p>
                                 <p>Payment Status: <strong>{product.isPaid? "Paid": "Not Yet Paid"}</strong></p>

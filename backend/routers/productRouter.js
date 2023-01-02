@@ -328,6 +328,7 @@ productRouter.put('/paidproducts', expressAsyncHandler( async(req, res) => {
     product.orderId = req.body.orderId
     product.deliveryCost = req.body.deliveryCost;
     product.service = req.body.service;
+    product.buyerId = req.body.buyerId;
   }
   const paidProduct = await product.save();
   res.json(paidProduct);

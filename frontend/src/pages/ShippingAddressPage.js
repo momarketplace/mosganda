@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { saveShippingAddress } from '../actions/basketActions';
 import CheckoutSteps from '../components/CheckoutSteps';
@@ -24,20 +25,28 @@ function ShippingAddressPage() {
     const [ state, setState ] = useState(shippingAddress.state);
     const [ country, setCountry ] = useState(shippingAddress.country);
     const [phone, setPhone] = useState(shippingAddress.phone);
+    const [ buyerId, setBuyerId ] = useState(shippingAddress.buyerId)
     
-    
+    //capture the buyerId
+    useEffect(() =>{
+        if(userInfo){
+            setBuyerId(userInfo._id)
+        }
+    },[userInfo])
     
     const dispatch = useDispatch();
     //function to handle submit
     const handleSummit = (e) => {
         e.preventDefault();
             
-        dispatch(saveShippingAddress({fullName, address, city, landmark, state, country, phone}));
+        dispatch(saveShippingAddress({fullName, address, city, landmark, state, country, phone, buyerId}));
 
         //redirect the user to payment
         //props.history.push('/payment');
         window.location="/payment"
     }
+
+    //console.log(buyerId)
     return (
         <div style={{width:"100%"}}>
             <CheckoutSteps step1 step2></CheckoutSteps>

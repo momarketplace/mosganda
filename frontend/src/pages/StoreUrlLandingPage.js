@@ -54,7 +54,7 @@ const [createChatLoading, setCreateChatLoading] = useState(false)
         fetchStore()
   }, [storename])
     
-    //console.log(mystore)
+    console.log(mystore)
 
 
     useEffect(() => {

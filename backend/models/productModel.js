@@ -42,6 +42,7 @@ const productSchema = new mongoose.Schema({
     buyerEmail: {type: String},
     buyerPhone: {type: String},
     buyerAddress: {type: String},
+    buyerId: {type: String},
     user: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "User",

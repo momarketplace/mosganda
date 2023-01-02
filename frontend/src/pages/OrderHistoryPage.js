@@ -57,7 +57,7 @@ function OrderHistoryPage() {
         dispatch(listOrderMine())
 
     }, [dispatch])
-    //console.log(orders)
+    console.log(orders)
 
     //set isDelivered to true
     const deliveredOrder = async (id) => {
