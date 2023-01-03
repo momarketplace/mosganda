@@ -1370,10 +1370,36 @@ a {
 font-size: 14px !important;
 }
 
+.about-page {
+  background-color: #fcfcfc;
+  padding: 20px;
+  width: 90%;
+  max-width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 20px;
+}
+
+.about-page > p {
+  font-size: 15px !important;
+  text-align: justify;
+}
+
+
 @media screen and (max-width: 600px) {
 
   .privacy-text {
     max-width: 95%;
+  }
+  .about-page {
+    width: 100%;
+    max-width: 95%;
+  }
+  .about-page > p {
+    max-width: 95%;
+  }
+  .about-page > h3, h4 {
+    text-align: center;
   }
 }
 
