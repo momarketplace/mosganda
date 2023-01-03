@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 
 function About() {
     return (
@@ -24,7 +24,7 @@ function About() {
             <p><strong>Integrity:</strong> At Mosganda, we do what we say, and say what we do. we build trust by making integrity our watch word.</p>
             <p><strong>Service:</strong> We exist to attract and maintain customers. Your satisfaction is our priority.</p>
 
-            <div className='row center'>
+            {/* <div className='row center'>
                 <div className='about-me'>
                     < Link to="/ojiko">
                     <img className='large' src="/images/ojiko.jpg" alt="Ojiko" />
@@ -34,7 +34,7 @@ function About() {
                         <p style={{padding:"0", margin:"0"}}>Founder</p>
                         </div>
                         </div>
-            </div>
+            </div> */}
         </div>
     )
 }

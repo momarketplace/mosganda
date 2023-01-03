@@ -1366,6 +1366,10 @@ a {
   width: 95%
 }
 
+.privacy > p{
+font-size: 14px !important;
+}
+
 @media screen and (max-width: 600px) {
 
   .privacy-text {

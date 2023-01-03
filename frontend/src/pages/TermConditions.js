@@ -177,11 +177,13 @@ Mosganda has the right to evict the Seller from Mosganda if any, or a combinatio
                 </ul>
             </p>
             <h4>(9) DELIVERED ITEM(S)</h4>
+            <p>
             <ul className='privacy-text'>
                 <li>(1) The buyer shall confirm delivery of every item delivered to him/her by the seller within 12 hours of receipt of such item(s).</li>
                 <li>(2) Mosganda shall notify the buyer via chat or SMS or email to confirm delivery for item(s) the seller has delivered to the buyer if Mosganda finds out that the buyer has not confirmed delivery for item(s) claimed to be delivered by the seller.</li>
                 <li>(3) If the buyer fails to confirm delivery after 48 hours of notification without any form of complain, Mosganda shall consider such item(s) delivered.</li>
             </ul>
+            </p>
             <h4>(10) RISK OF LOSS</h4>
             <p className='privacy-text'>All items purchased from Mosganda.com belong to the seller of that item(s) and are made pursuant to a shipment contract. This means that the Risk of Loss shall remain with the seller until the item is transferred to the buyer. In the event that the items are damaged after receipt, the risk falls on the buyer or consumer.</p>
             <h4>(11) RULES ABOUT YOUR CONTENT</h4>

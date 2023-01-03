@@ -103,6 +103,9 @@ function Homepage() {
 
       return (
       <div>
+        <marquee width="100%" direction="left" height="17px">
+Not yet started. We will let you know when we start operation.
+</marquee>
         <div className='homepage-header'>
           
             <form className='mosganda-header-search' onSubmit={handleSearch}>

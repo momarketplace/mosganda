@@ -1,42 +1,40 @@
 import React from 'react';
 
 function Privacy() {
-    return <div style={{backgroundColor:"#f8f8f8", maxWidth:"100%", padding:"10px"}}>
+    return <div style={{backgroundColor:"#f8f8f8", maxWidth:"100%", padding:"10px"}} className="privacy">
         <h3 style={{ textAlign: "center" }}>Privacy Policy</h3>
         <h4>About this notice</h4>
         <p>This privacy notice provides information on how Mosganda collects and processes your personal data when you visit our website.
             Mosganda is thoroughly committed to protecting the privacy of our site visitors and customers. We respect each visitor's and customer's right to personal privacy. To this end, we collect and use information throughout our website only as disclosed in this Privacy Policy.
         </p>
         <h4>What this privacy policy covers</h4>
-        <ul>
-            <li>(a) How we collect information from you.</li>
-            <li>(b) How we protect customer's information.</li>
-            <li>(c) How we use and share your information which you provide when using our webstie.</li>
-            <li>(d) General information inline with extant laws and regulations.</li>
-        </ul>
+        
+            <p>(a) How we collect information from you.</p>
+            <p>(b) How we protect customer's information.</p>
+            <p>(c) How we use and share your information which you provide when using our webstie.</p>
+            <p>(d) General information inline with extant laws and regulations.</p>
+        
         <p>This policy does not apply to the practices of third party agents, or people of which we do not exercise direct control, employment or management.</p>
         <h4>Consent:</h4>
         <p>By using this site, you have consented to our Privacy Policy and that you have the legal capacity to give consent. Otherwise, you may discontinue your use of our website and services.</p>
         
         <h4>(1) How we collect information from you</h4>
         <p>We collect the content, communications and other information you provide when you use our website, including when you sign up for an account, create a store, post item for sale, and message or communicate with others.
-We collect your personal information (including but not limited to email address, name, phone number, physical address, location, photo, etc from you when you set up an account with Mosganda. While you can browse some sections of our website without being a registered member, certain activities (such as placing an order or creating a store) do require registration. We do use your contact information to send you offers based on your previous orders and your interests. The information and personal data are as freely provided by you to us using any technology at the material time e.g. JWT
+We collect your personal information (including but not limited to email address, name, phone number, physical address, location, photo, etc) from you when you set up an account with Mosganda. While you can browse some sections of our website without being a registered member, certain activities (such as placing an order or creating a store) do require registration. We do use your contact information to send you offers based on your previous orders and your interests. The information and personal data are as freely provided by you to us using any technology at the material time e.g. JWT
         </p>
         
         <h4>(2) Use of your personal data</h4>
-        <p>We use your personal data to operate, provide, develop and improve the products and services that we offer, including the following:
-            <ul>
-                <li>(a)	Registering you as a new customer.</li>
-                <li>(b)	Processing and delivering your orders</li>
-                <li>(c)	Create and keep track of your store and items</li>
-                <li>(d) Managing your relationship with us.</li>
-                <li>(e) Enabling you to participate in promotions, chats, competitions and surveys.</li>
-                <li>(f) Improving our website, applications, products and services</li>
-                <li>(g) Recommending/advertising products or services which may be of interest to you.</li>
-                <li>(h) Complying with our legal obligations, including verifying your identity where necessary.</li>
-                <li>(i)	Detecting fraud.</li>
-            </ul>
+        <p>We use your personal data to operate, provide, develop and improve the products and services that we offer, including the following:    
         </p>
+        <p>(a)	Registering you as a new customer.</p>
+                <p>(b)	Processing and delivering your orders</p>
+                <p>(c)	Create and keep track of your store and items</p>
+                <p>(d) Managing your relationship with us.</p>
+                <p>(e) Enabling you to participate in promotions, chats, competitions and surveys.</p>
+                <p>(f) Improving our website, applications, products and services</p>
+                <p>(g) Recommending/advertising products or services which may be of interest to you.</p>
+                <p>(h) Complying with our legal obligations, including verifying your identity where necessary.</p>
+                <p>(i)	Detecting fraud.</p>
         
         <h4>(3) How we share your personal data</h4>
         <p>We may need to share your personal data with sellers, buyers, or third parties for the following purposes:
@@ -53,6 +51,7 @@ We collect your personal information (including but not limited to email address
             </ul>
         </p>
         <h4>(4) Governing principles of data processing</h4>
+        <p>
         <ul>
             <li>(a) Your personal data on Mosganda shall be collected and processed in accordance with legitimate and lawful purpose consented to by you herein, provided that a further processing may be done only for archiving, scientific research, historical research or statistical purposes for public interest in line with extant regulations and laws.</li>
             <li>(b) Personal data shall be adequate, accurate and without prejudice to the dignity of human person.</li>
@@ -60,8 +59,9 @@ We collect your personal information (including but not limited to email address
             <li>(d) Our data collection shall depict that we owe a duty of care to you.</li>
             <li>(e) We shall be accountable in line with extant laws and regulations.</li>
         </ul>
+        </p>
         <h4>(5) Personal data retention period</h4>
-        <p>Mosganda will only keep your personal information for as long as it is necessary for the purposes set out in this Privacy Policy, unless a longer retention period is required or permitted by law (such as tax, accounting or other legal requirements.) Upon request for account closure, your account will be closed but this closure will not involve deletion of historical records of the account for the reasons already stated. However, except as may be required by law or law enforcement agents and/or regulators, further processing of the personal information related to the account will cease from time of closure.</p>
+        <p>Mosganda will only keep your personal information for as long as it is necessary for the purposes set out in this Privacy Policy, unless a longer retention period is required or permitted by law (such as tax, accounting or other legal requirements). Upon request for account closure, your account will be closed but this closure will not involve deletion of historical records of the account for the reasons already stated. However, except as may be required by law or law enforcement agents and/or regulators, further processing of the personal information related to the account will cease from time of closure.</p>
         <h4>(6) Your privacy rights</h4>
         <p>It is important that the personal data we hold about you is accurate and current. Please keep us informed if your personal data changes during your relationship with us.
 Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to access, correct or erase your personal data, object to or restrict processing of your personal data, and unsubscribe from our emails and newsletters.
@@ -71,7 +71,7 @@ Under certain circumstances, you have rights under data protection laws in relat
         <h4>(8) Advertisement on Mosganda</h4>
         <p>We use third-party advertising companies to serve ads when you visit our website. These companies may use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.</p>
         <h4>(9) Remedies, questions and contact</h4>
-        <p>If you observe or have good grounds that your privacy rights have been infringed or likely to be infringed by the use of our website, please lodge your complaints or questions regarding our policy to the following address: help@Mosganda.com. Our Data Protection Officer shall attend to them. Generally, you may contact us on any issue by mail to help@Mosganda.com. You can also chat with us using out chat feature.</p>
+        <p>If you observe or have good grounds that your privacy rights have been infringed or likely to be infringed by the use of our website, please lodge your complaints or questions regarding our policy to the following address: contact@mosganda.com. Our Data Protection Officer shall attend to them. Generally, you may contact us on any issue by mail to contact@mosganda.com. You can also chat with us using out chat feature.</p>
         <h4>(10) Notification of changes</h4>
         <p>Mosganda reserves the right to make changes and/or updates to this Privacy Policy from time to time, without prior notice, and the latest version on this policy will be posted on our websites. You are advised to view this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on our web pages.</p>
   </div>;

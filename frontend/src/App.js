@@ -39,7 +39,7 @@ import WithdrawList from './pages/WithdrawList';
 import ComplainList from './pages/ComplainList';
 import TermConditions from './pages/TermConditions';
 import About from './pages/About';
-import Ojiko from './pages/Ojiko';
+//import Ojiko from './pages/Ojiko';
 // import Stack from '@mui/material/Stack';
 // import Alert from '@mui/material/Alert';
 // import LoadingBox from './components/LoadingBox';
@@ -348,9 +348,9 @@ function App() {
           <Route path="/viewuser/:id" element={ <ViewUser />}></Route>
         <Route path="/services" element={ <Services />}></Route>
           <Route path="/newsletterlist" element={ <NewsletterEmailList />}></Route>
-          <Route path="/ojiko" element={ <Ojiko />}></Route>
+          {/* <Route path="/ojiko" element={ <Ojiko />}></Route> */}
           <Route path="/about" element={ <About />}></Route>
-          <Route path="/termsandconditions" component={ <TermConditions />}></Route>
+          <Route path="/termsandconditions" element={ <TermConditions />}></Route>
           <Route path="/complainlist" element={ <ComplainList />}></Route>
           <Route path="/withdrawlist" element={ <WithdrawList />}></Route>
           <Route path="/orderlist" element={ <OrderList />}></Route>
