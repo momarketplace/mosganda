@@ -148,12 +148,14 @@ useEffect(() =>{
           <div className='withdrawal-information'>
             
               <h4>Withdrawal steps</h4>
+            <p>
             <ul>
               <li>Get the buyer information from the item displayed in this page.</li>
                 <li>Get the item/product delivered to the buyer.</li>
                 <li>Click on the "Withdraw" button, fill in your account details in the popup and click submit.</li>
               <li>Get paid within 12 hours.</li>
              </ul>
+            </p>
             <p className='withdrawal-notice'>Note that within this 12 hours, we are going to confirm if the buyer has received the item. So make sure you have successfully sent the item before clicking on "Withdraw" button.</p>
             <p className='withdrawal-notice'>Also note that we will deduct our 3% charge from the selling price. For example, if you sell an item that cost #1000, our 3% charge is #30. So you will receive #970. If the amount you charge for the delivery of the item is #300 for example. Then, what you will receive is #970 + #300, which is #1,270</p>
             </div>
@@ -230,7 +232,7 @@ useEffect(() =>{
               <div className='card' key={product._id}>
                 <div style={{padding:"5px"}}>
                   <div>
-                    <h4 style={{textAlign:"center"}}>Product Information</h4>
+                    <h5 style={{textAlign:"center"}}>Product Information</h5>
                     <p className='soldproduct-item'>Id: {product._id}</p>
                     <p className='soldproduct-item' style={{display:"flex"}}><img
                         className="small"
@@ -242,7 +244,7 @@ useEffect(() =>{
                       </Button>
                      
                       </p>
-                      <Button variant="outlined" color="primary" size="small" onClick={() => {
+                      <Button variant="contained" color="secondary" size="small" sx={{margin:"2px"}} onClick={() => {
                                          
                                          handleChat(product.buyerId)
                                     }}>
@@ -264,12 +266,12 @@ useEffect(() =>{
                     </p>
                   </div>
                   <div>
-                    <h4 style={{textAlign:"center"}}>Buyer Information</h4>
+                    <h5 style={{textAlign:"center"}}>Buyer Information</h5>
                     <p className='soldproduct-item'>Name: <b>{product.buyerName}</b>, Phone: <b>{product.buyerPhone}</b> </p>
                     <p className='soldproduct-item'>Address: { product.buyerAddress }</p>
                   </div>
                   <div>
-                    <h4 style={{textAlign:"center"}}>Product Status</h4>
+                    <h5 style={{textAlign:"center"}}>Product Status</h5>
                     <p className='soldproduct-item'>Payment: {product.isPaid ? "Paid at" : "No"}  { product.isPaid
                               ? product.isPaidAt.substring(0, 10)
                       : ""}</p>
@@ -283,7 +285,7 @@ useEffect(() =>{
                   <div>
                     {
                 !product.isSettled &&
-                 <Button sx={{ m: 2 }} variant="contained" size="large" onClick={() => {
+                 <Button sx={{ m: 2 }} variant="contained" size="large" color="success" onClick={() => {
                   setAmount(product.price)
                   setServiceCharge(product.price * 0.03)
                   setDeliveryCost(product.deliveryCost)
