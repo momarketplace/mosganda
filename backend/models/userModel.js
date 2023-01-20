@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema(
         ref: "Mosgandastores",
       },
     },
+    accountName: { type: String },
+    accountNumber: { type: String },
+    bank: { type: String },
+    accountPin: { type: String},
   },
   {
     timestamps: true,

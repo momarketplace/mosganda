@@ -202,6 +202,10 @@ userRouter.post('/login', expressAsyncHandler( async(req, res) => {
                 isActive: user.isActive,
                 phone: user.phone,
                 image: user.image,
+                accountName: user.accountName,
+                accountNumber: user.accountNumber,
+                bank: user. bank,
+                accountPin: user.accountPin,
                 token
             });
             return
@@ -256,8 +260,14 @@ userRouter.put('/profile', isAuth, expressAsyncHandler(async(req, res)=>{
 //update a user that created a store
 userRouter.put('/createstore', isAuth, expressAsyncHandler( async(req,res) =>{
     const user = await User.findById(req.body.user);
-    if(user){
+    if(user && !req.body.accountName){
         user.isSeller = true;
+    }
+    if(user && req.body.accountName) {
+      user.accountName = req.body.accountName || user.accountName;
+          user.accountNumber = req.body.accountNumber || user.accountNumber;
+          user.bank = req.body.bank || user. bank;
+          user.accountPin = bcrypt.hashSync(req.body.accountPin,8)  || user.accountPin;
     }
     const updatedUser = await user.save();
   res.json({
@@ -271,6 +281,10 @@ userRouter.put('/createstore', isAuth, expressAsyncHandler( async(req,res) =>{
           phone: updatedUser.phone,
           address: updatedUser.address,
           image: updatedUser.image,
+          accountName: updatedUser.accountName,
+          accountNumber: updatedUser.accountNumber,
+          bank: updatedUser. bank,
+          accountPin: updatedUser.accountPin,
           token: generateToken(updatedUser)
   })
 }))
@@ -409,6 +423,65 @@ userRouter.put('/confirmverification/:id', expressAsyncHandler(async(req,res) =>
   res.json(activeUser)
 }))
 
+
+//add bank account
+userRouter.put('/bankaccount', isAuth, expressAsyncHandler(async(req, res) =>{
+  const user = await User.findById(req.body.id)
+  if(user) {
+    user.accountName = req.body.accountName || user.accountName;
+    user.accountNumber = req.body.accountNumber || user.accountNumber;
+    user.bank = req.body.bank || user.bank;
+    user.accountPin = bcrypt.hashSync(req.body.accountPin,8)  || user.accountPin;
+    
+  }
+  const updatedUser = await user.save()
+  res.json({
+    accountName: updatedUser.accountName,
+    accountNumber: updatedUser.accountNumber,
+    bank: updatedUser. bank,
+    accountPin: updatedUser.accountPin,
+    token: generateToken(updatedUser)
+  })
+}))
+
+//edit bank account details
+userRouter.put('/editaccount', isAuth, expressAsyncHandler(async(req, res) =>{
+  const user = await User.findById(req.body.id)
+
+  if(user && !bcrypt.compareSync(req.body.accountPin, user.accountPin)){
+    return res.status(401).json({
+      message:"Incorrect account pin"
+    })
+  }else{
+    user.accountName = req.body.accountName || user.accountName;
+    user.accountNumber = req.body.accountNumber || user.accountNumber;
+    user.bank = req.body.bank || user.bank;
+    user.accountPin = bcrypt.hashSync(req.body.accountPin,8)  || user.accountPin;
+  }
+
+//  if(user) {
+//   if(!bcrypt.compareSync(req.body.accountPin, user.accountPin)){
+//     return res.status(401).json({
+//       message:"Incorrect account pin"
+//     })
+//   }
+//   if(bcrypt.compareSync(req.body.accountPin, user.accountPin)){
+//     user.accountName = req.body.accountName || user.accountName;
+//     user.accountNumber = req.body.accountNumber || user.accountNumber;
+//     user.bank = req.body.bank || user.bank;
+//     user.accountPin = bcrypt.hashSync(req.body.accountPin,8)  || user.accountPin;
+    
+//   }
+//  }
+
+  const updatedUser = await user.save()
+  res.json({
+    updatedUser,
+    token: generateToken(updatedUser)
+  })
+}))
+
+//if(bcrypt.compareSync(req.body.password, user.password))
 
 //delete a user
 userRouter.delete('/delete', async(req, res) =>{

@@ -9,12 +9,14 @@ function Services() {
                 <div className='store-service-item'>
                      <h4 className='service-h4'>Created my store, what next?</h4>
                     <p>Once you have created your store:   </p>
+                    <p>
                     <ul>
                         <li>(a) Edit it if necessary, using the "edit" button.</li>
                         <li>(b) Add items that you want to sell</li>
                         <li>(c) Post the items for sale.</li>
                         <li>(d) Share your store URL/link with customers</li>
                     </ul>
+                    </p>
                 </div>
                 <div className='store-service-item'>
                      <h4 className='service-h4'>Access my store</h4>
@@ -23,7 +25,7 @@ function Services() {
                 <div className='store-service-item'>
                      <h4 className='service-h4'>Add items for sale</h4>
                     <p>Click on the "add items for sale" button in your store, fill in information about the item and click "create". The item will be added to your store. Repeat the process to add more items.</p>
-                    <p>When adding an item to your store, there is a section for you to fill in the amount you will to charge for the delivery of the item. If you are offering free delivery, you can ignore that section.</p>
+                    <p>When adding an item to your store, there is a section for you to fill in the amount you will charge for the delivery of the item. If you are offering free delivery, you can ignore that section.</p>
                     
                 </div>
                 <div className='store-service-item'>
@@ -47,13 +49,15 @@ function Services() {
                 <div className='store-service-item'>
                      <h4 className='service-h4'>Withdrawal steps</h4>
                     <p>When someone buys from you on Mosganda, the item will be moved to your "sold items".</p>
+                    <p>
                     <ul>
                         <li>(1) Move the mouse to your name at the top of the screen, in the dropdown, click on "Sold items".</li>
                         <li>(2) Get the details of the buyer from the item, and send the item to the buyer.</li>
-                        <li>(3) When you successfully sent the item, click on the "Payme" button attached to the item and enter your account number.</li>
+                        <li>(3) When you successfully sent the item, click on the <b>Withdraw</b> button attached to the item. In the popup that appears, confirm your account number and click on <b>submit</b>.</li>
                         <li>(4) You will receive your money within 24 hours.</li>
                         <li>(5) Within this 24 hours period, we will confirm if the buyer has received the item, so make sure you send the item successfully before clicking the "Payme" button.</li>
                     </ul>
+                    </p>
                     <p>Note that the amount you charged for delivery of the item will also be paid together with the selling price.</p>
                     
                 </div>

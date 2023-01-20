@@ -53,6 +53,7 @@ function SoldProducts() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  console.log(userInfo)
    //import state from context
    const {setSelectedChat, chats, setChats } =
    ChatState();
@@ -77,6 +78,17 @@ const dispatch = useDispatch();
 useEffect(() =>{
     dispatch(getSoldProducts())
 },[dispatch])
+
+
+//useEffect to set varaibles for bank account details
+useEffect(() =>{
+  if(userInfo){
+    setAccountName(userInfo.accountName);
+    setAccountNumber(userInfo.accountNumber);
+    setBank(userInfo.bank)
+  }
+},[])
+
 
   const handleWithdraw = () => {
       dispatch(createWithdraw(accountName, accountNumber, bank, amount, deliveryCost, email, phone, productId));
@@ -152,7 +164,7 @@ useEffect(() =>{
             <ul>
               <li>Get the buyer information from the item displayed in this page.</li>
                 <li>Get the item/product delivered to the buyer.</li>
-                <li>Click on the "Withdraw" button, fill in your account details in the popup and click submit.</li>
+                <li>Click on the "Withdraw" button, confirm your account details in the popup that appears, and click submit.</li>
               <li>Get paid within 12 hours.</li>
              </ul>
             </p>
@@ -176,26 +188,34 @@ useEffect(() =>{
           <Typography id="modal-modal-title" variant="h6" component="h2">
                 <h3 style={{textAlign:"center"}}>Withdrawal Form</h3>
               </Typography>
-              <Box sx={{fontSize:'15px'}}>
+              {/* <Box sx={{fontSize:'15px'}}>
                 You will recieve #{amountToPay - serviceCharge}
-              </Box>
-              <form>
+              </Box> */}
+              <p>You will recieve #{amountToPay - serviceCharge}</p>
+
+              {
+                userInfo && userInfo.accountName || userInfo.accountNumber?
+                <>
+                <form>
                 <Box sx={{mt: 3}}>
                   <label htmlFor='accountName'>Account Name</label>
                   <input style={{marginLeft:"3px"}} type="text" id="accountName" placeholder='Account Name' required
-                    onChange ={(e) =>setAccountName(e.target.value)}
+                  value ={userInfo? userInfo.accountName:""}
+                    // onChange ={() =>setAccountName(userInfo && userInfo.accountName)}
                   />
                 </Box>
                 <Box sx={{mt:2}}>
                   <label htmlFor='accountNumber'>Account Number</label>
                   <input style={{marginLeft:"3px"}} type="text" id="accountNumber" placeholder='Account Number' required
-                    onChange ={(e) =>setAccountNumber(e.target.value)}
+                    value ={userInfo? userInfo.accountNumber:""}
+                    // onChange ={() =>setAccountName(userInfo && userInfo.accountNumber)}
                   />
                 </Box>
                 <Box sx={{mt:2}}>
                   <label htmlFor='bank'>Bank</label>
                   <input style={{marginLeft:"3px"}} type="text" id="bank" placeholder='Bank Name' required
-                    onChange ={(e) =>setBank(e.target.value)}
+                    value ={userInfo? userInfo.bank:""}
+                    // onChange ={() =>setAccountName(userInfo && userInfo.bank)}
                   />
                 </Box>
                 {
@@ -209,6 +229,10 @@ useEffect(() =>{
                 }
                 <Button sx={{textAlign:"center",m:2}} onClick ={handleWithdraw} variant="contained" color="success">Submit</Button>
               </form>
+                </>:
+                (<p>You have not added a bank account. Go to <Link to="/userstore">your store</Link>, click on the <strong>Add bank account</strong> button, to add account.</p>)
+              }
+              
           <Button sx={{textAlign:"center",m:2}} onClick ={handleClose} variant="contained" color="error">Close</Button>
         </Box>
       </Modal>
@@ -229,8 +253,8 @@ useEffect(() =>{
           
           {
             soldProducts?.map((product) => (
-              <div className='card' key={product._id}>
-                <div style={{padding:"5px"}}>
+              <div className='card soldpro' key={product._id}>
+                <div style={{padding:"5px", maxWidth:"90%"}}>
                   <div>
                     <h5 style={{textAlign:"center"}}>Product Information</h5>
                     <p className='soldproduct-item'>Id: {product._id}</p>
@@ -240,7 +264,7 @@ useEffect(() =>{
                         alt={product.name}
                 /><Button sx={{m:1}} variant="contained" size="small"
                          >
-                         <Link to = {`/product/${product._id}`} style={{color:"white"}}>View product</Link>
+                         <Link to = {`/product/${product._id}`} style={{color:"white"}}>view product</Link>
                       </Button>
                      
                       </p>
@@ -258,17 +282,18 @@ useEffect(() =>{
                             <MessageBox variant="danger">Error</MessageBox>
                           }
                     <p className='soldproduct-item'>
-                      <span style={{marginRight:"5px"}}>Name: {product.name}</span>
+                      <span style={{marginRight:"5px"}}>Name: <strong>{product.name}</strong></span>
                     </p>
                     <p className='soldproduct-item' style={{display:"flex"}}>
-                      <span>Price: #{product.price},</span> { " " }
-                      <span style={{marginLeft:"5px"}}>Delivery: #{ product.deliveryCost}</span>
+                      <span>Price: #<strong>{product.price}</strong>,</span> { " " }
+                      <span style={{marginLeft:"5px"}}>Delivery: #<strong>{product.deliveryCost}</strong></span>
                     </p>
                   </div>
                   <div>
                     <h5 style={{textAlign:"center"}}>Buyer Information</h5>
-                    <p className='soldproduct-item'>Name: <b>{product.buyerName}</b>, Phone: <b>{product.buyerPhone}</b> </p>
-                    <p className='soldproduct-item'>Address: { product.buyerAddress }</p>
+                    <p className='soldproduct-item'>Name: <b>{product.buyerName}</b></p>
+                    <p className='soldproduct-item'>Phone: <b>{product.buyerPhone}</b> </p>
+                    <p className='soldproduct-item'>Address: <strong>{product.buyerAddress}</strong></p>
                   </div>
                   <div>
                     <h5 style={{textAlign:"center"}}>Product Status</h5>
@@ -278,14 +303,14 @@ useEffect(() =>{
                     <p className='soldproduct-item'>Delivery: {product.isDelivererd ? "Delivered at" : "No"}  { product.isDelivererd
                               ? product.isDeliveredAt.substring(0, 10)
                       : ""} </p>
-                    <p className='soldproduct-item'>Paid by Mosganda: {product.isSettled ? "Paid at" : "Pending"}  { product.isSettled
+                    <p className='soldproduct-item'>Paid by Mosganda: {product.isSettled ? "Paid at" :product.hasSentWithdrawRequest?"pending": "No"}  { product.isSettled
                               ? product.isSettledAt.substring(0, 10)
                         : ""} </p>
                   </div>
                   <div>
                     {
                 !product.isSettled &&
-                 <Button sx={{ m: 2 }} variant="contained" size="large" color="success" onClick={() => {
+                 <Button sx={{ m: 2 }} variant="contained" size="small" color="success" onClick={() => {
                   setAmount(product.price)
                   setServiceCharge(product.price * 0.03)
                   setDeliveryCost(product.deliveryCost)

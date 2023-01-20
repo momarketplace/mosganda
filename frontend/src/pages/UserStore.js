@@ -27,6 +27,7 @@ import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Stack';
 import Alert from '@mui/material/Alert';
+import { updateUserCreateStore } from "../actions/userActions";
 
 const style = {
   position: 'absolute',
@@ -45,7 +46,7 @@ function UserStore() {
   //get login user details from store
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  //console.log(userInfo);
+  console.log(userInfo);
 
   //const history = useHistory()
   if (!userInfo.isSeller) {
@@ -236,6 +237,121 @@ function UserStore() {
     }, 2000);
   }
 
+
+// for adding and editing bank details
+  useEffect(() =>{
+    if(userInfo && userInfo.accountNumber !== ""){
+      setAccountNumber(userInfo.accountNumber)
+      setAccountName(userInfo.accountName)
+      setBank(userInfo.bank)
+      setAccountPin(userInfo.accountPin)
+    }
+
+  },[])
+
+  //modal to add bank account
+  const [openAccountModal, setOpenAccountModal] = React.useState(false);
+  const [accountName, setAccountName] = useState('')
+  const [accountNumber, setAccountNumber] = useState(0)
+  const [bank, setBank] = useState('')
+  const [accountPin, setAccountPin] = useState(0)
+  const [loadBank, setLoadBank] = useState(false)
+  const [errorLoadBank, setErrorLoadBank] = useState(false)
+  const [successLoadBank, setSuccessLoadBank] = useState(false)
+  const [pinLessMessage, setPinLessMessage] = useState(false)
+  const [pinMoreMessage, setPinMoreMessage] = useState(false)
+  //const [newAccountDetails, setNewAccountDetails] =useState()
+  
+  const handleAddAccount = () => setOpenAccountModal(true);
+  const handleCloseAddAccount = () => setOpenAccountModal(false);
+
+
+  //function to add bank details
+  const handleBankModal = async (e) => {
+    e.preventDefault()
+    if(accountPin.length < 4){
+      setPinLessMessage(true)
+      return
+    }
+    if(accountPin.length > 6){
+      setPinMoreMessage(true)
+      return
+    }
+    try {
+      setLoadBank(true)
+      await axios.put(`/api/v1/user/bankaccount`, {id:userInfo._id, accountName,accountNumber, bank, accountPin}, {
+        headers: {
+                    Authorization: `Bearer ${userInfo.token}`
+                }
+      })
+      setLoadBank(false)
+      setSuccessLoadBank(true)
+  
+
+    } catch (error) {
+      setErrorLoadBank(true)
+      setLoadBank(false)
+    }
+  }
+
+  
+
+  //function to edit bank account
+  
+  const [editAccountModal, setEditAccountModal] = React.useState(false);
+  const handleEditAccount = () => setEditAccountModal(true);
+  const handleCloseEditAccount = () => setEditAccountModal(false);
+
+  const handleEditBankModal = async (e) => {
+    e.preventDefault()
+    if(accountPin.length < 4){
+      setPinLessMessage(true)
+      return
+    }
+    if(accountPin.length > 6){
+      setPinMoreMessage(true)
+      return
+    }
+    try {
+      setLoadBank(true)
+      await axios.put(`/api/v1/user/editaccount`, {id:userInfo._id, accountName,accountNumber, bank, accountPin}, {
+        headers: {
+                    Authorization: `Bearer ${userInfo.token}`
+                }
+      })
+      setLoadBank(false)
+      setSuccessLoadBank(true)
+      setAccountName("")
+      setAccountNumber('')
+      setBank("")
+
+    } catch (error) {
+      setErrorLoadBank(true)
+      setLoadBank(false)
+    }
+  }
+
+
+  if (successLoadBank) {
+    //update user
+    dispatch(
+      updateUserCreateStore({
+        user: userInfo._id,
+        accountName,
+        accountNumber,
+        bank,
+        accountPin
+      })
+    );
+  }
+
+  setTimeout(() =>{
+    if(successLoadBank){
+      window.location = '/userstore'
+    }
+  },2000)
+
+  
 
 
   return (
@@ -498,11 +614,25 @@ function UserStore() {
               </Button>
           </Link>
           </div>
+          <div>
+           {
+            userInfo.accountName && userInfo.accountName !== ""?
+            <><Button sx={{marginTop: "3px"}} variant="contained" color="secondary" size="small" onClick={handleEditAccount}>
+            Edit bank account
+            </Button></>:
+            <><Button sx={{marginTop: "3px"}} variant="contained" color="secondary" size="small" onClick={handleAddAccount}>
+            Add bank account
+            </Button></>
+          } 
+          {/* <Button sx={{marginTop: "3px"}} variant="contained" color="secondary" size="small" onClick={handleAddAccount}>
+            Add bank account
+            </Button> */}
+          </div>
                   <div>
                     
            <Link to="/services">
             <Button sx={{marginTop: "3px"}} variant="contained" color="primary" size="large">
-              About store and withdrawal
+              Important Information
               </Button>
           </Link> 
           </div>
@@ -609,6 +739,7 @@ function UserStore() {
           ))}
       </div>
 
+{/* modal for openeing and locking store */}
 
       <Modal
         open={open}
@@ -655,9 +786,178 @@ function UserStore() {
       </Modal>
 
 
+
+{/* modal for adding bank account */}
+<Modal
+        open={openAccountModal}
+        onClose={handleCloseAddAccount}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <form onSubmit={handleBankModal} style={{display:"flex", flexDirection:"column"}}>
+            <h4>Add bank account</h4>
+            {
+              loadBank && <LoadingBox></LoadingBox>
+                  }
+                 
+            
+            {
+              errorLoadBank && <Stack sx={{ width: '90%' }} spacing={2}>
+                        <Alert severity="error" onClose={() => setErrorLoadBank(false)}>Failed to add account</Alert>
+      
+            </Stack>
+                  }
+                    
+            
+            {
+              successLoadBank && <Stack sx={{ width: '90%' }} spacing={2}>
+              <Alert severity="success" onClose={() => setSuccessLoadBank(false)}>Account added successfully.</Alert>
+      
+            </Stack>
+                  }
+                  
+            
+              
+            <label htmlFor="accountName">Account Name</label>
+            <input type="text" id="accountName" placeholder="John Doe" style={{marginBottom:"3px"}}
+              onChange={(e) => setAccountName(e.target.value)} required
+                    />
+           
+
+
+            
+            <label htmlFor="accountNunber">Account Number</label>
+            <input type="text" id="accountNumber" placeholder="1010101010" style={{marginBottom:"3px"}}
+              onChange={(e) => setAccountNumber(e.target.value)} required
+                    />
+           
+
+            
+            <label htmlFor="bankName">Bank</label>
+            <input type="text" id="bankName" placeholder="Zenith bank" style={{marginBottom:"3px"}}
+              onChange={(e) => setBank(e.target.value)} required
+                    />
+            
+            <p>Create a 4-6 character pin below, to provide extra security for this account detail. This pin will be required to make changes to this account detail.</p>
+
+            {
+              pinLessMessage && <Stack sx={{ width: '90%' }} spacing={2}>
+              <Alert severity="error" onClose={() => setPinLessMessage(false)}>Pin must not be less than 4 character</Alert>
+      
+            </Stack>
+            }
+            {
+              pinMoreMessage && <Stack sx={{ width: '90%' }} spacing={2}>
+              <Alert severity="error" onClose={() => setPinMoreMessage(false)}>Pin must not be more than 6 character</Alert>
+      
+            </Stack>
+            }
+            <label htmlFor="accountPin">Pin</label>
+            <input type="text" id="accountPin" placeholder="137611" style={{marginBottom:"3px"}}
+              onChange={(e) => setAccountPin(e.target.value)} required
+                    />
+                    <button style={{backgroundColor: "green", color:"white", margin:"5px", padding:"5px"}} type="submit">Add Account</button>
+            
+          </form>
+          <Button sx={{margin:"5px"}} variant="contained" color="error" size="small" onClick={handleCloseAddAccount}>
+                           
+                        Close
+                      </Button>
+        </Box>
+      </Modal>
+
+
+
+{/* modal for editting bank account details */}
+<Modal
+        open={editAccountModal}
+        onClose={handleCloseEditAccount}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <form onSubmit={handleEditBankModal} style={{display:"flex", flexDirection:"column"}}>
+            <h4>Edit bank account</h4>
+            {
+              loadBank && <LoadingBox></LoadingBox>
+                  }
+                 
+            
+            {
+              errorLoadBank && <Stack sx={{ width: '90%' }} spacing={2}>
+                        <Alert severity="error" onClose={() => setErrorLoadBank(false)}>Wrong account pin</Alert>
+      
+            </Stack>
+                  }
+                    
+            
+            {
+              successLoadBank && <Stack sx={{ width: '90%' }} spacing={2}>
+              <Alert severity="success" onClose={() => setSuccessLoadBank(false)}>Account edited successfully.</Alert>
+      
+            </Stack>
+                  }
+                  
+            
+              
+            <label htmlFor="accountName">Account Name</label>
+            <input type="text" id="accountName" placeholder="John Doe" style={{marginBottom:"3px"}}
+            value={accountName}
+              onChange={(e) => setAccountName(e.target.value)} required
+                    />
+           
+
+
+            
+            <label htmlFor="accountNunber">Account Number</label>
+            <input type="text" id="accountNumber" placeholder="1010101010" style={{marginBottom:"3px"}}
+            value={accountNumber}
+              onChange={(e) => setAccountNumber(e.target.value)} required
+                    />
+           
+
+            
+            <label htmlFor="bankName">Bank</label>
+            <input type="text" id="bankName" placeholder="Zenith bank" style={{marginBottom:"3px"}}
+            value={bank}
+              onChange={(e) => setBank(e.target.value)} required
+                    />
+            
+            <p>Enter your 4-6 digit account pin</p>
+
+            {
+              pinLessMessage && <Stack sx={{ width: '90%' }} spacing={2}>
+              <Alert severity="error" onClose={() => setPinLessMessage(false)}>Pin must not be less than 4 character</Alert>
+      
+            </Stack>
+            }
+            {
+              pinMoreMessage && <Stack sx={{ width: '90%' }} spacing={2}>
+              <Alert severity="error" onClose={() => setPinMoreMessage(false)}>Pin must not be more than 6 character</Alert>
+      
+            </Stack>
+            }
+            <label htmlFor="accountPin">Pin</label>
+            <input type="text" id="accountPin" placeholder="137611" style={{marginBottom:"3px"}}
+              onChange={(e) => setAccountPin(e.target.value)} required
+                    />
+                    <button style={{backgroundColor: "green", color:"white", margin:"5px", padding:"5px"}} type="submit">Edit Account</button>
+            
+          </form>
+          <Button sx={{margin:"5px"}} variant="contained" color="error" size="small" onClick={handleCloseEditAccount}>
+                           
+                        Close
+                      </Button>
+        </Box>
+      </Modal>
+
+
+
 </div>
           )
       }
+
 
 
         </div>
